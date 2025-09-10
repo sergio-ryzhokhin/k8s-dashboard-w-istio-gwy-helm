@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: {{ template "kubernetes-dashboard.name" (index .Subcharts "kubernetes-dashboard") }}-{{ index .Subcharts "kubernetes-dashboard" "Values" "web" "role" }}
+  labels:
+    {{- include "kubernetes-dashboard.labels" (index .Subcharts "kubernetes-dashboard") | nindent 4 }}
+  annotations:
+    {{- include "kubernetes-dashboard.annotations" (index .Subcharts "kubernetes-dashboard") | nindent 4 }}
+spec:
+  hosts:
+  - {{ .Values.domain }}
+  gateways:
+  - {{ template "kubernetes-dashboard.name" (index .Subcharts "kubernetes-dashboard") }}-{{ index .Subcharts "kubernetes-dashboard" "Values" "web" "role" }}
+  tls:
+  - match:
+    - port: 443
+      sniHosts:
+      - {{ .Values.domain }}
+    route:
+    - destination:
+        host: {{ template "kong.fullname" (index .Subcharts "kubernetes-dashboard" "Subcharts" "kong") }}-proxy
+        port:
+          number: 443

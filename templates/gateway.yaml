@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: {{ template "kubernetes-dashboard.name" (index .Subcharts "kubernetes-dashboard") }}-{{ index .Subcharts "kubernetes-dashboard" "Values" "web" "role" }}
+  labels:
+    {{- include "kubernetes-dashboard.labels" (index .Subcharts "kubernetes-dashboard") | nindent 4 }}
+  annotations:
+    {{- include "kubernetes-dashboard.annotations" (index .Subcharts "kubernetes-dashboard") | nindent 4 }}
+spec:
+  selector:
+    istio: {{ .Values.istioIngressGatewayName }}
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: PASSTHROUGH
+    hosts:
+    - {{ .Values.domain }}

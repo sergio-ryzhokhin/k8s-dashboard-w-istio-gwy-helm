@@ -1,0 +1,9 @@
+apiVersion: v2
+name: kube-dashboard-istio-gwy
+version: 0.0.1
+description: Helm chart to install Kubernetes Dashboard with Istio Gateway integration
+kubeVersion: ">=1.21.0-0"
+dependencies:
+  - name: kubernetes-dashboard
+    version: ">=7.13.0"
+    repository: https://kubernetes.github.io/dashboard/

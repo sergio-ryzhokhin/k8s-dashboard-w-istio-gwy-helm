@@ -1,0 +1,30 @@
+# istioIngressGatewayName represents name of the shared Istio Gateway to expose Kubernetes Dashboard through
+istioIngressGatewayName: ingressgateway
+
+# domain value is domain name to use for Kubernetes Dashboard
+domain: localhost
+
+# createAdminUser determines if a sample user account should be created automatically
+createAdminUser: true
+
+# adminUsername is a username to use for sample user when it's created automatically
+adminUsername: kubernetes-dashboard-user
+
+# customTlsCertFile and customTlsKeyFile represent paths to custom TLS certificate and certificate key 
+# files to use for HTTPS instead of automatically generated self-signed certificate
+customTlsCertFile:
+customTlsKeyFile:
+
+# tlsSecretName represents name of a secret where TLS certificate will be stored 
+# it's value should not be modified by itself but only in conjunction with secretVolumes, env.ssl_cert and 
+# env.ssl_cert_key values for Kong specified below
+tlsSecretName: kubernetes-dashboard-kong-proxy-tls
+
+kubernetes-dashboard:
+  kong:
+    # must match tlsSecretName above
+    secretVolumes: [kubernetes-dashboard-kong-proxy-tls]
+    env:
+      # must match secretVolumes item name added above
+      ssl_cert: /etc/secrets/kubernetes-dashboard-kong-proxy-tls/tls.crt
+      ssl_cert_key: /etc/secrets/kubernetes-dashboard-kong-proxy-tls/tls.key

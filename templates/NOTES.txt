@@ -1,0 +1,7 @@
+Kubernetes Dashboard has been installed and should be available in a few minutes at:
+    https://{{ .Values.domain }}/
+{{ if .Values.createAdminUser }}
+Sample Username: {{ .Values.adminUsername }}
+You can generate access token for above user with the following command:
+    kubectl -n {{ .Release.Namespace }} create token {{ .Values.adminUsername }}
+{{- end }}
