@@ -10,6 +10,9 @@ createAdminUser: true
 # adminUsername is a username to use for sample user when it's created automatically
 adminUsername: kubernetes-dashboard-user
 
+# tlsSecretAnnotations allows to define additional annotations for Secret with TLS details
+tlsSecretAnnotations: {}
+
 # customTlsCertFile and customTlsKeyFile represent paths to custom TLS certificate and certificate key 
 # files to use for HTTPS instead of automatically generated self-signed certificate
 customTlsCertFile:

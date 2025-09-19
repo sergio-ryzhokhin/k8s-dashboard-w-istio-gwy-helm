@@ -48,6 +48,7 @@ In addition to values inherited from [Kubernetes Dashboard](https://artifacthub.
 * `domain` (default value `localhost`) - domain name to use for Kubernetes Dashboard
 * `createAdminUser` (deafult value `true`) - flag that determines if a sample user account should be created automatically
 * `adminUsername` (default value `kubernetes-dashboard-user`) - username to use for sample user when it's created automatically
+* `tlsSecretAnnotations` - list of additional annotations to add to Secret object storing TLS details for HTTPS
 * `customTlsCertFile` - path to custom TLS certificate file to use for HTTPS instead of automatically generated self-signed certificate
 * `customTlsKeyFile` - path to custom TLS certificate key file to use for HTTPS instead of automatically generated self-signed certificate
 

@@ -12,3 +12,12 @@
 tls.crt: {{ $cert.Cert | b64enc }}
 tls.key: {{ $cert.Key | b64enc }}
 {{- end }}
+
+{{/*
+TLS Secret annotations
+*/}}
+{{- define "kubernetes-dashboard.tls-secret-annotations" -}}
+{{- with .Values.tlsSecretAnnotations }}
+{{- toYaml . }}
+{{- end }}
+{{- end -}}
